@@ -1,0 +1,272 @@
+<!--
+    Copyright (C) 2015  Spacefire, inc.
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License along
+    with this program; if not, write to the Free Software Foundation, Inc.,
+    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+!-->
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="William Spacefire">
+    <meta name="description" content="Pesquise aqui suas músicas favoritas">
+    <link rel="shortcut icon" href="https://2.bp.blogspot.com/--Ro_XyJVF0Q/VeX0JVkuokI/AAAAAAAAAik/ELxflDg0cok/s1600/play.png"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <title>Ducksound</title>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <style>
+      .homeSearch {
+        position: absolute;
+        top: 30px;
+        width: 100%;
+        z-index: 2;
+      }
+      .logo {
+        color: #fff;
+        font-family: "Comic Sans MS";
+        font-size: 69px;
+      }
+      body {
+        background: #242424 none repeat scroll 0 0;
+        color: #fff;
+      }
+      .homeSearch input {
+        background: #fff none repeat scroll 0 0;
+        border: 2px solid #fff;
+        color: #000;
+      }
+      .homeSearch input:focus {
+        border-color: #fff;
+        box-shadow: none;
+      }
+      .homeSearch button {
+        border-color: #fff;
+      }
+      .homeSearch button:hover {
+        background-color: #fff;
+        border-color: #fff;
+        color: #06f;
+      }
+      .homeSearch button:active:focus, .homeSearch button:focus {
+        background-color: #fff;
+        border-color: #fff;
+        box-shadow: none;
+        outline: medium none;
+      }
+      .audio li img {
+        height: 150px;
+        width: 150px;
+      }
+      .audios {
+        position: absolute;
+        right: 0;
+        top: 30px;
+      }
+      .audio {
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 2;
+      }
+      .audios li {
+        display: inline-block;
+        height: 184px;
+        list-style: outside none none;
+        margin-right: 8px;
+        overflow: hidden;
+        position: relative;
+        top: 5px;
+        width: 150px;
+      }
+      .audios li p {
+        overflow: hidden;
+        text-overflow: "...";
+        white-space: nowrap;
+        width: 100%;
+      }
+      .audios li button.btn-play img {
+        cursor: pointer;
+        height: 75px;
+        width: 75px;
+      }
+      .audios li button.btn-play {
+        background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+        border: medium none;
+        cursor: pointer;
+        height: auto;
+        left: 31px;
+        position: relative;
+        top: -116px;
+        width: auto;
+      }
+      .audios li button.btn-play:hover {
+        background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+      }
+      .audios li button.btn-play:active:focus {
+        background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+      }
+      .audios li button.btn-play:focus {
+        background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+      }
+      header {
+        background: #000 none repeat scroll 0 0;
+        left: 0;
+        padding: 10px;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 3;
+      }
+      header .logo_icon {
+        float: left;
+        height: 40px;
+        margin-bottom: -5px;
+        margin-right: 5px;
+        position: relative;
+        top: -2px;
+        width: 40px;
+      }
+      header .logo_name {
+        float: left;
+        font-size: 27px;
+        margin-bottom: -5px;
+        margin-right: 8px;
+      }
+      .audios p {
+        font-weight: bold;
+        left: 3px;
+        position: relative;
+        text-shadow: 0.2em 0.1em 0.1em #000;
+        top: -70px;
+      }
+      .audios li .download_link {
+        background: #000 none repeat scroll 0 0;
+        color: white;
+        font-weight: bold;
+        margin-bottom: -31px;
+        opacity: 0.7;
+        padding: 5px;
+        position: relative;
+        text-align: center;
+        top: -105px;
+        width: 100%;
+      }
+      .audios li .download_link a {
+        color: white;
+      }
+      .audios li a:hover {
+        text-decoration: none;
+      }
+    </style>
+    <div class="homeSearch">
+      <header>
+        <img src="https://2.bp.blogspot.com/--Ro_XyJVF0Q/VeX0JVkuokI/AAAAAAAAAik/ELxflDg0cok/s1600/play.png" class="logo_icon"><div class="logo_name">Ducksound</div>
+        <div class="input-group">
+          <input placeholder="Pesquise suas músicas" class="form-control" id="search_query" type="text">
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default glyphicon glyphicon-search" style="position:relative;top:0px"></button>
+          </span>
+        </div>
+      </header>
+      <div class="audio">
+        <div class="audios"></div>
+      </div>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        var ajax = null;
+        $('body').on('keyup', "#search_query", function(){
+          var q = $(this).val();
+          var url = 'https://api.soundcloud.com/tracks?client_id=da2849d8ad5fea67366e4da7444f0152&q='+q+'&limit=50';
+          if(ajax != null){
+            ajax.abort();
+          }
+          ajax = $.getJSON(url, function(tracks){
+            var result = "";
+            for (var i = 0;i<tracks.length;i++) {
+              var image = tracks[i]['artwork_url'];
+              if(image == null){
+                image = tracks[i]['user']['avatar_url'].replace('http','https').replace("httpss","https");
+              }
+              var download = tracks[i]['stream_url'].replace('stream','download')+'?client_id=da2849d8ad5fea67366e4da7444f0152';
+              if(tracks[i]['downloadable'] != true){
+                download = "http://188.138.17.231/~krafta/dow.php?url="+tracks[i]['uri']+"/stream?client_id=da2849d8ad5fea67366e4da7444f0152&name="+tracks[i]['title'].replace('"','').replace("'","")+" (Ducksound)";
+              }
+              result += '<li><img src="'+image+'"><button class="btn-play play'+i+'" image = "'+i+'" id="audioPlay" rel="'+tracks[i]["stream_url"]+'?client_id=da2849d8ad5fea67366e4da7444f0152"><img id="image'+i+'" src="https://2.bp.blogspot.com/--Ro_XyJVF0Q/VeX0JVkuokI/AAAAAAAAAik/ELxflDg0cok/s1600/play.png"></button><a href="'+download+'"><div class="download_link">DOWNLOAD</div></a><p class="title">'+tracks[i]['title']+'</p></li>';
+            }
+            $('.audios').html(result);
+          });
+        });
+        $.getJSON("https://api.soundcloud.com/tracks?client_id=da2849d8ad5fea67366e4da7444f0152&limit=50", function(tracks){
+          var result = "";
+          for (var i = 0;i<tracks.length;i++) {
+            var image = tracks[i]['artwork_url'];
+            if(image == null){
+              image = tracks[i]['user']['avatar_url'].replace('http','https').replace("httpss","https");
+            }
+            var download = tracks[i]['stream_url'].replace('stream','download')+'?client_id=da2849d8ad5fea67366e4da7444f0152';
+            if(tracks[i]['downloadable'] != true){
+              download = "http://188.138.17.231/~krafta/dow.php?url="+tracks[i]['uri']+"/stream?client_id=da2849d8ad5fea67366e4da7444f0152&name="+tracks[i]['title'].replace('"','').replace("'","")+" (Ducksound)";
+            }
+            result += '<li><img src="'+image+'"><button class="btn-play play'+i+'" image = "'+i+'" id="audioPlay" rel="'+tracks[i]["stream_url"]+'?client_id=da2849d8ad5fea67366e4da7444f0152"><img id="image'+i+'" src="https://2.bp.blogspot.com/--Ro_XyJVF0Q/VeX0JVkuokI/AAAAAAAAAik/ELxflDg0cok/s1600/play.png"></button><a href="'+download+'"><div class="download_link">DOWNLOAD</div></a><p class="title">'+tracks[i]['title']+'</p></li>';
+          }
+          $('.audios').html(result);
+        });
+        $('body').on('click', '#audioPlay', function(){
+          var song = document.getElementById("audio_play");
+          var stream_url = $(this).attr('rel');
+          var image = $(this).attr("image");
+          if(song != null){
+            if(stream_url != $('audio source').attr("src")){
+              var playnum = $('audio').attr('image');
+              $('.play'+playnum+' #image'+playnum).attr("src","/play.png");
+              $('audio').remove();
+              $('body').append('<audio image="'+image+'" preload="" id="audio_play"><source src="'+stream_url+'" type="audio/mpeg">Your browser does not support the audio element.</audio>');
+              var song = document.getElementById("audio_play");
+              song.play();
+              $('#image'+image).attr("src", "https://4.bp.blogspot.com/-Qlbb9EnD0r0/VeX0JUsVXuI/AAAAAAAAAio/vDUj2QzcL4Y/s1600/pause.png");
+            }else{
+              if(song.paused){
+                song.play();
+                $("#image"+image).attr('src', 'https://4.bp.blogspot.com/-Qlbb9EnD0r0/VeX0JUsVXuI/AAAAAAAAAio/vDUj2QzcL4Y/s1600/pause.png');
+              }else{
+                song.pause();
+                $("#image"+image).attr('src', 'https://2.bp.blogspot.com/--Ro_XyJVF0Q/VeX0JVkuokI/AAAAAAAAAik/ELxflDg0cok/s1600/play.png');
+              }
+            }
+          }else{
+            $('body').append('<audio image="'+image+'" preload="" id="audio_play"><source src="'+stream_url+'" type="audio/mpeg">Your browser does not support the audio element.</audio>');
+            var song = document.getElementById("audio_play");
+            song.play();
+            $('#image'+image).attr("src", "https://4.bp.blogspot.com/-Qlbb9EnD0r0/VeX0JUsVXuI/AAAAAAAAAio/vDUj2QzcL4Y/s1600/pause.png");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
